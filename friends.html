@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FRIENDS</title>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: "Poppins", sans-serif; }
+    body {
+      background: #004242;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* Sign-in overlay */
+    #signinOverlay {
+      position: fixed; inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+    }
+    .signin-box {
+      background: #111;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+    }
+    .signin-box h2 {
+      margin-bottom: 10px;
+    }
+    .signin-box input {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .signin-box button {
+      background: #0af;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(0, 251, 255, 0.6);
+    }
+
+    /* Slideshow container */
+    .slideshow {
+      position: fixed;
+      inset: 0;
+      display: none;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide img {
+      width: 80%;
+      height: 80%;
+      max-width: 800px; /* optional limit */
+      max-height: 80vh;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 5px solid rgba(0, 56, 61, 0.3);
+      animation: glowPulse 5s infinite alternate;
+      box-shadow: 0 0 25px rgba(0, 238, 255, 0.6);
+      margin: auto;
+      display: block;
+    }
+    
+    /* Glowing border animation */
+    @keyframes glowPulse {
+        0% {
+            box-shadow: 0 0 25px rgba(0, 255, 179, 0.6),
+                        0 0 40px rgba(0, 255, 179, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.8),
+                0 0 80px rgba(0, 150, 255, 0.6);
+  }
+}
+    .active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    /* Narration text */
+    .narration {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      text-align: center;
+      font-size: 2vw;
+      color: #fff;
+      line-height: 1.5;
+      text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+      z-index: 20;
+      opacity: 1; /* visible immediately */
+}
+.narration.show {
+  opacity: 1;
+}
+
+    /* Overlay fade */
+    .fade-out {
+      animation: fadeout 1s forwards;
+    }
+    @keyframes fadeout {
+      from { opacity: 1; }
+      to { opacity: 0; visibility: hidden; }
+    }
+  /* Narration fade animations */
+.fade-in {
+  animation: fadeIn 10s forwards;
+}
+
+.fade-out {
+  animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+/* Fade out animation for slideshow */
+.fade-out-slideshow {
+  animation: fadeOut 3s forwards;
+}
+@media (max-width: 768px) {
+  .narration {
+    font-size: 4vw;
+    line-height: 1.4;
+  }
+  .signin-box {
+    width: 90%;
+    padding: 20px;
+  }
+  .slide img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- Sign-in popup -->
+  <div id="signinOverlay">
+    <div class="signin-box">
+      <h2>Welcome Dear Users 💖</h2>
+      <p>Please enter your name to continue</p>
+      <input type="text" id="visitorName" placeholder="Enter your name" />
+      <br />
+      <button id="signInBtn">Sign In</button>
+    </div>
+  </div>
+
+  <!-- Slideshow container -->
+  <div class="slideshow" id="slideshow">
+    <div class="slide active"><img src="1.jpg" alt=""></div>
+    <div class="slide"><img src="01.jpg" alt=""></div>
+    <div class="slide"><img src="02.jpg" alt=""></div>
+    <div class="slide"><img src="03.jpg" alt=""></div>
+    <div class="slide"><img src="05.jpg" alt=""></div>
+    <div class="slide"><img src="7.jpg" alt=""></div>
+    <div class="slide"><img src="8.jpg" alt=""></div>
+    <div class="slide"><img src="10.jpg" alt=""></div>
+    <div class="slide"><img src="11.jpg" alt=""></div>
+    <div class="slide"><img src="15.jpg" alt=""></div>
+    <div class="slide"><img src="8.jpg" alt=""></div>
+    <div class="slide"><img src="20.jpg" alt=""></div>
+    <div class="slide"><img src="21.jpg" alt=""></div>
+    <div class="slide"><img src="22.jpg" alt=""></div>
+    <div class="slide"><img src="23.jpg" alt=""></div>
+    <div class="slide"><img src="26.jpg" alt=""></div>
+    <div class="slide"><img src="27.jpg" alt=""></div>
+    <div class="slide"><img src="28.jpg" alt=""></div>
+    <div class="slide"><img src="57.jpg" alt=""></div>
+    <div class="slide"><img src="31.jpg" alt=""></div>
+    <div class="slide"><img src="32.jpg" alt=""></div>
+    <div class="slide"><img src="44.jpg" alt=""></div>
+    <div class="slide"><img src="34.jpg" alt=""></div>
+    <div class="slide"><img src="35.jpg" alt=""></div>
+    <div class="slide"><img src="38.jpg" alt=""></div>
+    <div class="slide"><img src="40.jpg" alt=""></div>
+    <div class="slide"><img src="41.jpg" alt=""></div>
+    <div class="slide"><img src="494816027_1015803293987439_1490734277205061683_n.jpg" alt=""></div>
+    <div class="slide"><img src="50.jpg" alt=""></div>
+    <div class="slide"><img src="48.jpg" alt=""></div>
+    <div class="slide"><img src="58.jpg" alt=""></div>
+    <div class="slide"><img src="54.jpg" alt=""></div>
+    <div class="slide"><img src="60.jpg" alt=""></div>
+    <div class="slide"><img src="490211052_674725531918033_1550126621346511280_n.jpg" alt=""></div>
+    <div class="slide"><img src="1,0.jpg" alt=""></div>
+    <div class="slide"><img src="52.jpg" alt=""></div>
+    <div class="slide"><img src="39.jpg" alt=""></div>
+    <div class="slide"><img src="488581526_3068780846608171_2753513527866302434_n.jpg" alt=""></div>
+    <div class="slide"><img src="47.jpg" alt=""></div>
+    <div class="slide"><img src="59.jpg" alt=""></div>
+
+
+  </div>
+
+  <!-- Narration text (centered) -->
+<div class="narration" id="narration"></div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" src="friends song.mp3" preload="auto"></audio>
+
+<script>
+const overlay = document.getElementById("signinOverlay");
+const btn = document.getElementById("signInBtn");
+const input = document.getElementById("visitorName");
+const slideshow = document.getElementById("slideshow");
+const slides = document.querySelectorAll(".slide");
+const narrationEl = document.getElementById("narration");
+const music = document.getElementById("bgMusic");
+
+btn.addEventListener("click", () => {
+  const name = input.value.trim();
+  if (!name) return alert("Please enter your name 😊");
+
+  overlay.style.display = "none"; // Hide sign-in
+  music.play().catch(err => console.log("Music play failed:", err)); // Play music
+
+  narrationEl.innerHTML = `
+    Hello, <b>${name}</b>, Welcome to our memories...<br>
+    Do you still remember the days we spent together?<br>
+    The laughter, the fun, the joy we shared.<br>
+    We laughed, cried, and grew side by side.<br><br>
+    Each picture tells a story of our incredible journey.<br>
+    Though time has passed, our bond remains unbroken.<br>
+    I'm truly grateful for every moment we've shared.<br>
+    Thank you for being part of this journey ❤️
+  `;
+
+  // Fade in narration (10s)
+  narrationEl.classList.add("fade-in");
+
+  // Fade out narration after 11s
+  setTimeout(() => {
+    narrationEl.classList.remove("fade-in");
+    narrationEl.classList.add("fade-out");
+  }, 11000);
+
+  // Fade in slideshow after 12s
+  setTimeout(() => {
+    slideshow.classList.add("fade-in");
+    slideshow.style.display = "block";
+    slides[0].classList.add("active");
+    setInterval(nextSlide, 4000);
+  }, 12000);
+
+  // Start music immediately
+  music.play().catch(err => console.log("Music play failed:", err));
+
+    // Optional: fade out narration smoothly
+    narrationEl.style.transition = "opacity 2s";
+    narrationEl.style.opacity = 0;
+
+  }, 5000);
+
+  // When music ends, fade out slideshow and show thank-you message
+music.addEventListener("ended", () => {
+  slideshow.classList.add("fade-out-slideshow");
+
+  setTimeout(() => {
+    slideshow.style.display = "none";
+    narrationEl.innerHTML = "Thank you for your time, have a great day! 🌸";
+    narrationEl.classList.remove("fade-out");
+    narrationEl.classList.add("fade-in");
+  }, 3000); // wait for fade out to finish before showing message
+});
+
+
+function nextSlide() {
+  const currentSlide = document.querySelector(".slide.active");
+  currentSlide.classList.remove("active");
+  let nextIndex = [...slides].indexOf(currentSlide) + 1;
+  if (nextIndex >= slides.length) nextIndex = 0;
+  slides[nextIndex].classList.add("active");
+}
+
+// Allow Enter key to sign in
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter") btn.click();
+});
+</script>
+
+
+</body>
+</html>
